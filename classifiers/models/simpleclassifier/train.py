@@ -72,8 +72,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='')
 
     #Training arguments
-    parser.add_argument('--trs', dest='trainset', type=str, default='dataset/summaries/leafsnaptrainset', help='Path to the trainset summary')
-    parser.add_argument('--tes', dest='testset', type=str, default='dataset/summaries/leafsnaptestset', help='Path to the testset summary')
+    parser.add_argument('--trs', dest='trainset', type=str, default='dataset/summaries/leafsnap_trainset', help='Path to the trainset summary')
+    parser.add_argument('--tes', dest='testset', type=str, default='dataset/summaries/leafsnap_testset', help='Path to the testset summary')
     parser.add_argument('--rd', dest='root_dir', type=str, default='home/jordan/leafsnap', help='Path to the images')
     parser.add_argument('--bs', dest='batch_size', type=int, default=16, help='Mini batch size')
     parser.add_argument('--lr', dest='learning_rate', type=float, default=0.001, help='Learning rate')
