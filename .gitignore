@@ -1,2 +1,3 @@
 venv/
 leafsnap-dataset/
+*__pycache__

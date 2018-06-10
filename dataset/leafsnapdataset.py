@@ -9,14 +9,13 @@ from torch.utils.data import Dataset
 class LeafsnapDataset(Dataset):
     def __init__(self, summary, resize=(256, 256)):
         """
-        LeafsnapDataset constructor
+        LeavesDataset constructor
         Args:
             summary (string): Path the dataset summary file
             resize (tuple of int): Shape for image resize
         """
 
         self.resize = resize
-        self.nb_class = 185
 
         with open(summary, 'r') as f:
             data = f.read().split('\n')[:-1]
@@ -25,12 +24,13 @@ class LeafsnapDataset(Dataset):
         self.data = [d.split('\t') for d in data]
 
         #Labels
-        species = sorted(set([d[3] for d in self.data]))
-        one_hots = [[0] * len(species) for i in range(self.nb_class)]
-        for i in range(self.nb_class):
+        species = sorted(set([d[1] for d in self.data]))
+        one_hots = [[0] * len(species) for i in range(len(species))]
+        for i in range(len(species)):
             one_hots[i][i] = 1
-        self.classes = {species[i]:i for i in range(self.nb_class)}
-        self.one_hots = {species[i]:one_hots[i] for i in range(self.nb_class)}
+        self.classes = {species[i]:i for i in range(len(species))}
+        self.one_hots = {species[i]:one_hots[i] for i in range(len(species))}
+        self.nb_class = len(self.classes.keys())
 
     def __len__(self):
         """
@@ -45,10 +45,11 @@ class LeafsnapDataset(Dataset):
         """
 
         #image
-        image = misc.imresize(misc.imread(os.path.join('leafsnap-dataset', self.data[idx][1])), self.resize)
+        image = misc.imread(os.path.join('leafsnap-dataset', self.data[idx][0]))
+        image = misc.imresize(image, self.resize)
 
         #label
-        species = self.data[idx][3]
+        species = self.data[idx][1]
         one_hot = self.one_hots[species]
         label = self.classes[species]
 
