@@ -7,7 +7,7 @@ from scipy import misc
 from torch.utils.data import Dataset
 
 class LeafsnapDataset(Dataset):
-    def __init__(self, rood_dir, summary, resize=(256, 256)):
+    def __init__(self, root_dir, summary, resize=(256, 256)):
         """
         LeavesDataset constructor
         Args:
