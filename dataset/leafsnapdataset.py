@@ -7,15 +7,17 @@ from scipy import misc
 from torch.utils.data import Dataset
 
 class LeafsnapDataset(Dataset):
-    def __init__(self, summary, resize=(256, 256)):
+    def __init__(self, rood_dir, summary, resize=(256, 256)):
         """
         LeavesDataset constructor
         Args:
             summary (string): Path the dataset summary file
+            root_dir (string): Path to the directory containing the leafsnap-dataset
             resize (tuple of int): Shape for image resize
         """
 
         self.resize = resize
+        self.root_dir = root_dir
 
         with open(summary, 'r') as f:
             data = f.read().split('\n')[:-1]
@@ -45,7 +47,7 @@ class LeafsnapDataset(Dataset):
         """
 
         #image
-        image = misc.imread(os.path.join('leafsnap-dataset', self.data[idx][0]))
+        image = misc.imread(os.path.join(self.root_dir, self.data[idx][0]))
         image = misc.imresize(image, self.resize)
 
         #label

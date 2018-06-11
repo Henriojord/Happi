@@ -119,8 +119,8 @@ if __name__ == '__main__':
         os.makedirs(os.path.join(args.directory, 'logs'))
 
     #Datasets
-    trainset = leafsnapdataset.LeafsnapDataset(args.trainset, (args.image_size, args.image_size))
-    testset = leafsnapdataset.LeafsnapDataset(args.testset, (args.image_size, args.image_size))
+    trainset = leafsnapdataset.LeafsnapDataset(args.root_dir, args.trainset, (args.image_size, args.image_size))
+    testset = leafsnapdataset.LeafsnapDataset(args,root_dir, args.testset, (args.image_size, args.image_size))
     datasets = {'train': trainset, 'test': testset}
 
     model = simpleclassifier.SimpleClassifier(args.filter, args.layer, args.block, args.dense, trainset.nb_class, args.image_size)
