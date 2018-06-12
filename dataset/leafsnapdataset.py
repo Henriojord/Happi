@@ -47,7 +47,7 @@ class LeafsnapDataset(Dataset):
         """
 
         #Image name
-        name = self.data[idx][0].split('/')[:-4]
+        name = self.data[idx][0].split('/')[-1][:-4]
 
         #image
         image = misc.imread(os.path.join(self.root_dir, self.data[idx][0]))
