@@ -3,7 +3,7 @@ Embedded leaf classifier
 
 ## Data
 First, I will use the LeafsnapDataset [1].
-The dataset was randomly split into a train set (80%) and a test set (20%).
+The dataset (field + lab) was randomly split into a train set (80%) and a test set (20%).
 
 ## Simple Convolutional Neural Network
 ![simpleclassifier architecture](img/simpleclassifier.png)
