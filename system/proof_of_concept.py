@@ -17,7 +17,7 @@ data = torch.from_numpy(data)
 likelihood = torch.nn.functional.softmax(data, 1)
 _, classe = torch.max(likelihood, 1)
 classe = classe.cpu().numpy()[0]
-for s, c in list.items():
+for s, c in dataset.classes.items():
     if c == classe:
         species = s
 print(species)
