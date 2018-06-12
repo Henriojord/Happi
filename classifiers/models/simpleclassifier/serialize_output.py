@@ -3,6 +3,7 @@ import os
 import torch
 import pickle
 import numpy as np
+from torch.utils.data import DataLoader
 
 import utils.processing
 from dataset import leafsnapdataset
@@ -64,7 +65,7 @@ for i_batch, sample in enumerate(tqdm(dataloader)):
     #     with open(name, 'wb') as f:
     #         pickle.dump(logits.cpu().detach().numpy(), f)
 
-    
+
     # i += 1
     # if args.species in t['species']:
     #     image = torch.tensor(t['image']).float()
