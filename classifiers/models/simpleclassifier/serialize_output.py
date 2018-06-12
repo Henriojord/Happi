@@ -33,7 +33,7 @@ if cuda:
 print(model)
 
 i = 0
-while args.species not in testset[i]['name']:
+while args.species not in testset[i]['species']:
     i += 1
 
 image = torch.tensor(testset[i]['image']).float()
@@ -45,6 +45,6 @@ logits = model(image)
 likelihood = torch.nn.functional.softmax(logits, 1)
 _, classe = torch.max(likelihood, 1)
 
-name = testset[i]['name'].split('/')[-1][:-4]
+name = testset.data[i][0].split('/')[-1][:-4]
 with open(name, 'w') as f:
     f.write(str(classe))
