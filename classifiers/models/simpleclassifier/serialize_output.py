@@ -34,37 +34,53 @@ model.train(False)
 print(model)
 
 i = 0
-for t in testset:
-    if args.species in t['species']:
-        image = torch.tensor(t['image']).float()
-        if cuda:
-            image = image.cuda()
-        image = utils.processing.preprocess(image.view(1, 256, 256, 3))
+dataloader = DataLoader(datasets[p], batch_size=batch_size, shuffle=True, num_workers=4)
 
-        logits = model(image)
-        likelihood = torch.nn.functional.softmax(logits, 1)
-        _, classe = torch.max(likelihood, 1)
-        classe = classe.item()
+for i_batch, sample in enumerate(tqdm(dataloader)):
+# for t in testset:
+    images = torch.tensor(sample['image']).float()
+    if cuda:
+        images = images.cuda()
+    images = utils.processing.preprocess(images)
+    logits = model(images)
+    likelihood = torch.nn.functional.softmax(logits, 1)
+    _, classe = torch.max(likelihood, 1)
+    classe = classe.item()
 
-        print(classe, testset.classes[testset.data[i][1]], testset.data[i][1])
-        if classe == testset.classes[testset.data[i][1]]:
-            name = testset.data[i][0].split('/')[-1][:-4]
-            with open(name, 'wb') as f:
-                pickle.dump(logits.cpu().detach().numpy(), f)
-    i += 1
-# i = 0
-# while args.species not in testset[i]['species']:
-#     i += 1
-#
-# image = torch.tensor(testset[i]['image']).float()
-# if cuda:
-#     image = image.cuda()
-# image = utils.processing.preprocess(image.view(1, 256, 256, 3))
-#
-# logits = model(image)
-# likelihood = torch.nn.functional.softmax(logits, 1)
-# _, classe = torch.max(likelihood, 1)
-#
-# name = testset.data[i][0].split('/')[-1][:-4]
-# with open(name, 'wb') as f:
-#     pickle.dump(logits.cpu().detach().numpy(), f)
+    for c in classe:
+        print(c)
+
+    # if args.species in t['species']:
+    #
+    #     logits = model(image)
+    #     likelihood = torch.nn.functional.softmax(logits, 1)
+    #     _, classe = torch.max(likelihood, 1)
+    #     classe = classe.item()
+    #
+    #     print(classe, testset.classes[testset.data[i][1]], testset.data[i][1])
+    #     name = testset.data[i][0].split('/')[-1][:-4]
+    #     if classe == testset.classes[testset.data[i][1]]:
+    #         name = 'error_' + name
+    #     with open(name, 'wb') as f:
+    #         pickle.dump(logits.cpu().detach().numpy(), f)
+
+    
+    # i += 1
+    # if args.species in t['species']:
+    #     image = torch.tensor(t['image']).float()
+    #     if cuda:
+    #         image = image.cuda()
+    #     image = utils.processing.preprocess(image.view(1, 256, 256, 3))
+    #
+    #     logits = model(image)
+    #     likelihood = torch.nn.functional.softmax(logits, 1)
+    #     _, classe = torch.max(likelihood, 1)
+    #     classe = classe.item()
+    #
+    #     print(classe, testset.classes[testset.data[i][1]], testset.data[i][1])
+    #     name = testset.data[i][0].split('/')[-1][:-4]
+    #     if classe == testset.classes[testset.data[i][1]]:
+    #         name = 'error_' + name
+    #     with open(name, 'wb') as f:
+    #         pickle.dump(logits.cpu().detach().numpy(), f)
+    # i += 1
