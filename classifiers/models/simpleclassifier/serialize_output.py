@@ -24,6 +24,11 @@ parser.add_argument('-l', dest='layer', type=int, default=2, help='Number of lay
 parser.add_argument('-d', dest='dense', type=str, default='128,128,128', help='Fully-connected architecture')
 args = parser.parse_args()
 
+if not os.path.exists(os.path.join(args.directory, 'serialized_logits')):
+    os.makedirs(os.path.join(args.directory, 'serialized_logits'))
+if not os.path.exists(os.path.join(args.directory, 'serialized_logits', args.species)):
+    os.makedirs(os.path.join(args.directory, 'serialized_logits', args.species))
+
 cuda = torch.cuda.is_available()
 
 testset = leafsnapdataset.LeafsnapDataset(args.root_dir, args.testset, (args.image_size, args.image_size))
@@ -39,7 +44,6 @@ i = 0
 dataloader = DataLoader(testset, batch_size=8, shuffle=True, num_workers=4)
 
 for i_batch, sample in enumerate(dataloader):
-# for t in testset:
     images = torch.tensor(sample['image']).float()
     if cuda:
         images = images.cuda()
@@ -49,9 +53,7 @@ for i_batch, sample in enumerate(dataloader):
     _, classe = torch.max(likelihood, 1)
 
     for c in range(len(classe)):
-        print(sample['name'])
         #If model's answer is correct and the species is the one specified as argument
         if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
-            print('write {}'.format(sample['name'][c]))
-            with open(sample['name'][c], 'wb') as f:
+            with open(os.path.join(args.directory, 'serialized_logits', args.species, sample['name'][c]), 'wb') as f:
                 pickle.dump(logits.cpu().detach().numpy(), f)
