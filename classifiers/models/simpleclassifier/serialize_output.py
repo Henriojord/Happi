@@ -29,6 +29,7 @@ cuda = torch.cuda.is_available()
 testset = leafsnapdataset.LeafsnapDataset(args.root_dir, args.testset, (args.image_size, args.image_size))
 
 model = simpleclassifier.SimpleClassifier(args.filter, args.layer, args.block, args.dense, testset.nb_class, args.image_size)
+model.load_state_dict(torch.load(os.path.join(args.directory, 'best_model')))
 if cuda:
     model = model.cuda()
 model.train(False)
@@ -49,7 +50,7 @@ for i_batch, sample in enumerate(dataloader):
     #classe = classe.item()
 
     for c in range(len(classe)):
-        if classe[c].item() == sample['label'][c].item():
+        if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
             with open(name, 'wb') as f:
                 pickle.dump(logits.cpu().detach().numpy(), f)
 
