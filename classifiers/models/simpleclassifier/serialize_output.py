@@ -49,8 +49,8 @@ for i_batch, sample in enumerate(dataloader):
     #classe = classe.item()
 
     for c in range(len(classe)):
-        #if c.item() ==
-        print(classe[c].item())
+        print(classe[c].item(), sample['label'])
+        # if classe[c].item() == sample['label']
 
     # if args.species in t['species']:
     #
