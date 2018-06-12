@@ -12,7 +12,7 @@ args = parser.parse_args()
 
 dataset = leafsnapdataset.LeafsnapDataset(args.root_dir, 'dataset/summaries/testset', (256, 256))
 with open(args.serial, 'rb') as f:
-    data = pickel.load(f)
+    data = pickle.load(f)
 data = torch.from_numpy(data)
 likelihood = torch.nn.functional.softmax(data, 1)
 _, classe = torch.max(likelihood, 1)
