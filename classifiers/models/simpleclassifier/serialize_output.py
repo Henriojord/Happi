@@ -5,12 +5,12 @@ import numpy as np
 
 import utils
 from dataset import leafsnapdataset
-from classifiers.models import simpleclassifier
+import classifiers.models.simpleclassifier.model as simpleclassifier
 
 parser = argparse.ArgumentParser(description='')
 
 parser.add_argument('-m', dest='model', type=str, default='', help='Serialized model')
-parser.add_argument('--tes', dest='testset', type=str, default='data/summaries/testset', help='Path to the testset summary')
+parser.add_argument('--tes', dest='testset', type=str, default='dataset/summaries/testset', help='Path to the testset summary')
 parser.add_argument('--rd', dest='root_dir', type=str, default='/home/scom/data/umn64', help='Path to the images')
 parser.add_argument('--dir', dest='directory', type=str, default='/home/scom/Documents/happi_exp1', help='Directory to store results')
 parser.add_argument('--ims', dest='image_size', type=int, default=256, help='Image size')
