@@ -6,7 +6,7 @@ import numpy as np
 from dataset import leafsnapdataset
 
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('--rd', dest='root_dir', type=str, default='/home/scom/data/umn64', help='Path to the images')
+parser.add_argument('--rd', dest='root_dir', type=str, default='/home/scom/leafsnap-dataset', help='Path to the images')
 parser.add_argument('-s', dest='serial', type=str, default='', help='Path to a serialized output')
 args = parser.parse_args()
 
