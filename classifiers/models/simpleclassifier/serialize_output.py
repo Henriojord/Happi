@@ -48,4 +48,4 @@ _, classe = torch.max(likelihood, 1)
 
 name = testset.data[i][0].split('/')[-1][:-4]
 with open(name, 'wb') as f:
-    pickle.dump(logits.cpu().numpy(), f)
+    pickle.dump(logits.cpu().detach().numpy(), f)
