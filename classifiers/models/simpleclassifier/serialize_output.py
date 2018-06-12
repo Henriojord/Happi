@@ -49,7 +49,7 @@ for i_batch, sample in enumerate(dataloader):
     #classe = classe.item()
 
     for c in classe:
-        print(c)
+        print(c.item())
 
     # if args.species in t['species']:
     #
