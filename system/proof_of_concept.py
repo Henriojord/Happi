@@ -10,7 +10,7 @@ parser.add_argument('--rd', dest='root_dir', type=str, default='/home/scom/data/
 parser.add_argument('-s', dest='serial', type=str, default='', help='Path to a serialized output')
 args = parser.parse_args()
 
-dataset = leafsnapdataset.LeafsnapDataset(args.root_dir, 'data/summaries/testset', (256, 256))
+dataset = leafsnapdataset.LeafsnapDataset(args.root_dir, 'dataset/summaries/testset', (256, 256))
 with open('FILE', 'rb') as f:
     data = pickel.load(f)
 data = torch.from_numpy(data)
