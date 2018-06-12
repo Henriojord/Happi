@@ -40,6 +40,8 @@ def train(model, datasets, optimizer, epoch, batch_size, directory):
             nb_correct = 0
             nb_sample = 0
 
+            model.train(p == 'train')
+
             dataloader = DataLoader(datasets[p], batch_size=batch_size, shuffle=True, num_workers=4)
 
             for i_batch, sample in enumerate(tqdm(dataloader)):
@@ -68,7 +70,7 @@ def train(model, datasets, optimizer, epoch, batch_size, directory):
 
                 #Compute number of correct predictions
                 likelihood = torch.nn.functional.softmax(logits, 1)
-                _, classes = torch.max(logits, 1)
+                _, classes = torch.max(likelihood, 1)
                 nb_correct += torch.sum(classes == labels).item()
 
             epoch_loss = running_loss / nb_sample
