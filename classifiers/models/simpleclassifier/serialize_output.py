@@ -29,7 +29,7 @@ testset = leafsnapdataset.LeafsnapDataset(args.root_dir, args.testset, (args.ima
 model = simpleclassifier.SimpleClassifier(args.filter, args.layer, args.block, args.dense, testset.nb_class, args.image_size)
 if cuda:
     model = model.cuda()
-
+model.train(False)
 print(model)
 
 i = 0
