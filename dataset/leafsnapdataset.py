@@ -46,6 +46,9 @@ class LeafsnapDataset(Dataset):
         Return the specified sample
         """
 
+        #Image name
+        name = self.data[idx][0].split('/')[:-4]
+
         #image
         image = misc.imread(os.path.join(self.root_dir, self.data[idx][0]))
         image = misc.imresize(image, self.resize)
@@ -56,6 +59,6 @@ class LeafsnapDataset(Dataset):
         label = self.classes[species]
 
         #sample
-        sample = {'image': image, 'label': label, 'one_hot':one_hot, 'species': species}
+        sample = {'image': image, 'label': label, 'one_hot':one_hot, 'species': species, 'name': name}
 
         return sample
