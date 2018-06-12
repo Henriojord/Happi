@@ -51,7 +51,7 @@ for i_batch, sample in enumerate(dataloader):
 
     for c in range(len(classe)):
         if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
-            with open(name, 'wb') as f:
+            with open(sample['name'][c], 'wb') as f:
                 pickle.dump(logits.cpu().detach().numpy(), f)
 
     # if args.species in t['species']:
