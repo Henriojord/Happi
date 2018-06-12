@@ -1,5 +1,5 @@
 # Happi
-Embedded leaf classifier
+Leaf classifier embedded into a Raspberry-pi.
 
 ## Data
 First, I will use the LeafsnapDataset [1].
