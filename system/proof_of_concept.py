@@ -11,9 +11,13 @@ parser.add_argument('-s', dest='serial', type=str, default='', help='Path to a s
 args = parser.parse_args()
 
 dataset = leafsnapdataset.LeafsnapDataset(args.root_dir, 'dataset/summaries/testset', (256, 256))
+
+### TODO : REPLACE BY MODEL
 with open(args.serial, 'rb') as f:
     data = pickle.load(f)
 data = torch.from_numpy(data)
+###
+
 likelihood = torch.nn.functional.softmax(data, 1)
 _, classe = torch.max(likelihood, 1)
 classe = classe.cpu().numpy()[0]
