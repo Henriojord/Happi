@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser(description='')
 
 parser.add_argument('-m', dest='model', type=str, default='', help='Serialized model')
 parser.add_argument('--tes', dest='testset', type=str, default='dataset/summaries/testset', help='Path to the testset summary')
-parser.add_argument('--rd', dest='root_dir', type=str, default='/home/scom/data/umn64', help='Path to the images')
+parser.add_argument('--rd', dest='root_dir', type=str, default='/home/scom/leafsnap-dataset', help='Path to the images')
 parser.add_argument('--dir', dest='directory', type=str, default='/home/scom/Documents/happi_exp1', help='Directory to store results')
 parser.add_argument('--ims', dest='image_size', type=int, default=256, help='Image size')
 parser.add_argument('-s', dest='species', type=str, default='', help='Species to serialize')
@@ -34,18 +34,34 @@ model.train(False)
 print(model)
 
 i = 0
-while args.species not in testset[i]['species']:
+for t in testset:
     i += 1
+    if args.species in t['species']:
+        image = torch.tensor(t['image']).float()
+        if cuda:
+            image = image.cuda()
+        image = utils.processing.preprocess(image.view(1, 256, 256, 3))
 
-image = torch.tensor(testset[i]['image']).float()
-if cuda:
-    image = image.cuda()
-image = utils.processing.preprocess(image.view(1, 256, 256, 3))
+        logits = model(image)
+        likelihood = torch.nn.functional.softmax(logits, 1)
+        _, classe = torch.max(likelihood, 1)
 
-logits = model(image)
-likelihood = torch.nn.functional.softmax(logits, 1)
-_, classe = torch.max(likelihood, 1)
-
-name = testset.data[i][0].split('/')[-1][:-4]
-with open(name, 'wb') as f:
-    pickle.dump(logits.cpu().detach().numpy(), f)
+        name = testset.data[i][0].split('/')[-1][:-4]
+        with open(name, 'wb') as f:
+            pickle.dump(logits.cpu().detach().numpy(), f)
+# i = 0
+# while args.species not in testset[i]['species']:
+#     i += 1
+#
+# image = torch.tensor(testset[i]['image']).float()
+# if cuda:
+#     image = image.cuda()
+# image = utils.processing.preprocess(image.view(1, 256, 256, 3))
+#
+# logits = model(image)
+# likelihood = torch.nn.functional.softmax(logits, 1)
+# _, classe = torch.max(likelihood, 1)
+#
+# name = testset.data[i][0].split('/')[-1][:-4]
+# with open(name, 'wb') as f:
+#     pickle.dump(logits.cpu().detach().numpy(), f)
