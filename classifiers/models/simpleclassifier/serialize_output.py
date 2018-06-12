@@ -3,7 +3,7 @@ import os
 import torch
 import numpy as np
 
-import utils
+import utils.processing
 from dataset import leafsnapdataset
 import classifiers.models.simpleclassifier.model as simpleclassifier
 
