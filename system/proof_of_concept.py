@@ -11,7 +11,7 @@ parser.add_argument('-s', dest='serial', type=str, default='', help='Path to a s
 args = parser.parse_args()
 
 dataset = leafsnapdataset.LeafsnapDataset(args.root_dir, 'dataset/summaries/testset', (256, 256))
-with open('FILE', 'rb') as f:
+with open(args.serial, 'rb') as f:
     data = pickel.load(f)
 data = torch.from_numpy(data)
 likelihood = torch.nn.functional.softmax(data, 1)
