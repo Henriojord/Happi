@@ -50,6 +50,7 @@ for i_batch, sample in enumerate(dataloader):
 
     for c in range(len(classe)):
         #if c.item() ==
+        print(classe[c].item())
 
     # if args.species in t['species']:
     #
