@@ -28,8 +28,6 @@ Hyper-parameters:
 * Number of training epochs: 250
 * Input images resized to: 256x256
 
-Performance: **Test set top-1 accuracy = 91.4%**
-
 [1] "Leafsnap: A Computer Vision System for Automatic Plant Species Identification,"
 Neeraj Kumar, Peter N. Belhumeur, Arijit Biswas, David W. Jacobs, W. John Kress, Ida C. Lopez, João V. B. Soares,
 Proceedings of the 12th European Conference on Computer Vision (ECCV),
