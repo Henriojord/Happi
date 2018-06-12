@@ -47,7 +47,7 @@ for t in testset:
         _, classe = torch.max(likelihood, 1)
         classe = classe.item()
 
-        print(classe, testset.classes[testset.data[i][1]])
+        print(classe, testset.classes[testset.data[i][1]], testset.data[i][1])
         if classe == testset.classes[testset.data[i][1]]:
             name = testset.data[i][0].split('/')[-1][:-4]
             with open(name, 'wb') as f:
