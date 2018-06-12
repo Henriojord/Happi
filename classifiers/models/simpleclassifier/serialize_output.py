@@ -46,7 +46,7 @@ for i_batch, sample in enumerate(dataloader):
     logits = model(images)
     likelihood = torch.nn.functional.softmax(logits, 1)
     _, classe = torch.max(likelihood, 1)
-    classe = classe.item()
+    #classe = classe.item()
 
     for c in classe:
         print(c)
