@@ -39,7 +39,7 @@ while args.species not in testset[i]['species']:
 image = torch.tensor(testset[i]['image']).float()
 if cuda:
     image = image.cuda()
-image = utils.processing.preprocess(image)
+image = utils.processing.preprocess(image.view(1, 256, 256, 3))
 
 logits = model(image)
 likelihood = torch.nn.functional.softmax(logits, 1)
