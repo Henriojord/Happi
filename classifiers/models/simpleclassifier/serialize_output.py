@@ -46,9 +46,10 @@ for t in testset:
         likelihood = torch.nn.functional.softmax(logits, 1)
         _, classe = torch.max(likelihood, 1)
 
-        name = testset.data[i][0].split('/')[-1][:-4]
-        with open(name, 'wb') as f:
-            pickle.dump(logits.cpu().detach().numpy(), f)
+        if classe[0] == self.classes[species]:
+            name = testset.data[i][0].split('/')[-1][:-4]
+            with open(name, 'wb') as f:
+                pickle.dump(logits.cpu().detach().numpy(), f)
 # i = 0
 # while args.species not in testset[i]['species']:
 #     i += 1
