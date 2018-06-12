@@ -5,6 +5,7 @@ import numpy as np
 
 import utils
 from dataset import leafsnapdataset
+from classifiers.models import simpleclassifier
 
 parser = argparse.ArgumentParser(description='')
 
