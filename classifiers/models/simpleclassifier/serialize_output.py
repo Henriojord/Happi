@@ -35,7 +35,6 @@ print(model)
 
 i = 0
 for t in testset:
-    i += 1
     if args.species in t['species']:
         image = torch.tensor(t['image']).float()
         if cuda:
@@ -52,6 +51,7 @@ for t in testset:
             name = testset.data[i][0].split('/')[-1][:-4]
             with open(name, 'wb') as f:
                 pickle.dump(logits.cpu().detach().numpy(), f)
+    i += 1
 # i = 0
 # while args.species not in testset[i]['species']:
 #     i += 1
