@@ -51,7 +51,6 @@ class SimpleClassifier(torch.nn.Module):
         self.conv = torch.nn.Sequential(*layers)
 
         #Fully-connected part
-        print(type(self.input_size))
         flatten = ((self.input_size//(2**self.nb_blocks))**2) * (prev_f // 2)
 
         layers = [torch.nn.Linear(flatten, self.dense[0]), torch.nn.BatchNorm1d(self.dense[0]), torch.nn.ReLU()]
