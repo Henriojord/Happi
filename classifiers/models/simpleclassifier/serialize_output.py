@@ -46,5 +46,5 @@ likelihood = torch.nn.functional.softmax(logits, 1)
 _, classe = torch.max(likelihood, 1)
 
 name = testset.data[i][0].split('/')[-1][:-4]
-with open(name, 'w') as f:
-    f.write(str(classe))
+with open(name, 'wb') as f:
+    pickle.dump(logits.cpu().numpy(), f)
