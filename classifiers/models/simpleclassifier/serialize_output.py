@@ -35,7 +35,7 @@ model.train(False)
 print(model)
 
 i = 0
-dataloader = DataLoader(datasets[p], batch_size=batch_size, shuffle=True, num_workers=4)
+dataloader = DataLoader(testset, batch_size=8, shuffle=True, num_workers=4)
 
 for i_batch, sample in enumerate(tqdm(dataloader)):
 # for t in testset:
