@@ -48,8 +48,8 @@ for i_batch, sample in enumerate(dataloader):
     _, classe = torch.max(likelihood, 1)
     #classe = classe.item()
 
-    for c in classe:
-        print(c.item())
+    for c in range(len(classe)):
+        if c.item() ==
 
     # if args.species in t['species']:
     #
