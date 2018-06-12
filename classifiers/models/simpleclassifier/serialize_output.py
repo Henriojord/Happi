@@ -37,7 +37,7 @@ print(model)
 i = 0
 dataloader = DataLoader(testset, batch_size=8, shuffle=True, num_workers=4)
 
-for i_batch, sample in enumerate(tqdm(dataloader)):
+for i_batch, sample in enumerate(dataloader):
 # for t in testset:
     images = torch.tensor(sample['image']).float()
     if cuda:
