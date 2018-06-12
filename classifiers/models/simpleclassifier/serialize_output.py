@@ -26,7 +26,7 @@ cuda = torch.cuda.is_available()
 
 testset = leafsnapdataset.LeafsnapDataset(args.root_dir, args.testset, (args.image_size, args.image_size))
 
-model = simpleclassifier.SimpleClassifier(args.filter, args.layer, args.block, args.dense, trainset.nb_class, args.image_size)
+model = simpleclassifier.SimpleClassifier(args.filter, args.layer, args.block, args.dense, testset.nb_class, args.image_size)
 if cuda:
     model = model.cuda()
 
