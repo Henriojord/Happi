@@ -33,7 +33,7 @@ if cuda:
 print(model)
 
 i = 0
-while '' not in testset[i]['name']:
+while args.species not in testset[i]['name']:
     i += 1
 
 image = torch.tensor(testset[i]['image']).float()
