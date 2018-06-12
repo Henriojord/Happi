@@ -49,6 +49,7 @@ for i_batch, sample in enumerate(dataloader):
     _, classe = torch.max(likelihood, 1)
 
     for c in range(len(classe)):
+        print(sample['name'])
         #If model's answer is correct and the species is the one specified as argument
         if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
             print('write {}'.format(sample['name'][c]))
