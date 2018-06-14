@@ -55,6 +55,7 @@ for i_batch, sample in enumerate(dataloader):
     for c in range(len(classe)):
         #If model's answer is correct and the species is the one specified as argument
         if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
+            print(likelihood.shape)
             output = {k:(v, likelihood[v]) for k, v in testset.classes.items()}
             print(output)
             # with open(os.path.join(args.directory, 'serialized_logits', args.species, sample['name'][c]), 'wb') as f:
