@@ -50,7 +50,6 @@ _, classe = torch.max(likelihood, 1)
 print(likelihood, likelihood.shape)
 output = {k:(v, likelihood[0][v]) for k, v in testset.classes.items()}
 
-print(name)
 best_1 = [0,0]
 best_2 = [0,0]
 best_3 = [0,0]
