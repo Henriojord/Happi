@@ -56,7 +56,8 @@ for i_batch, sample in enumerate(dataloader):
         #If model's answer is correct and the species is the one specified as argument
         if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
             output = {k:(v, likelihood[c][v].item()) for k, v in testset.classes.items()}
-print(sample['name'][c])
+            name = sample['name'][c]
+print(name)
 best_1 = [0,0]
 best_2 = [0,0]
 best_3 = [0,0]
