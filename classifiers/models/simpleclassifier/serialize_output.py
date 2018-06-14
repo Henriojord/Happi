@@ -55,6 +55,6 @@ for i_batch, sample in enumerate(dataloader):
     for c in range(len(classe)):
         #If model's answer is correct and the species is the one specified as argument
         if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
-            print(sample['name'][c], likelihood[c])
+            print(sample['name'][c], likelihood[c], _[c])
             # with open(os.path.join(args.directory, 'serialized_logits', args.species, sample['name'][c]), 'wb') as f:
             #     pickle.dump(logits.cpu().detach().numpy(), f)
