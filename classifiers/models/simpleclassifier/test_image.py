@@ -47,7 +47,7 @@ image = utils.processing.preprocess(image)
 logits = model(image)
 likelihood = torch.nn.functional.softmax(logits, 1)
 _, classe = torch.max(likelihood, 1)
-
+print(likelihood, likelihood.shape)
 output = {k:(v, likelihood[v].item()) for k, v in testset.classes.items()}
 
 print(name)
