@@ -55,8 +55,23 @@ for i_batch, sample in enumerate(dataloader):
     for c in range(len(classe)):
         #If model's answer is correct and the species is the one specified as argument
         if classe[c].item() == sample['label'][c].item() and sample['species'][c] == args.species:
-            print(likelihood.shape)
             output = {k:(v, likelihood[c][v].item()) for k, v in testset.classes.items()}
-            print(output)
+print(sample['name'][c])
+best_1 = [0,0]
+best_2 = [0,0]
+best_3 = [0,0]
+for k, v in output.items():
+    if v[1] > best_1[1]:
+        best_1[0] = k
+        best_1[1] = v[1]
+    elif v[1] > best_2[1]:
+        best_2[0] = k
+        best_2[1] = v[1]
+    elif v[1] > best_3[1]:
+        best_3[0] = k
+        best_3[1] = v[1]
+print(best_1)
+print(best_2)
+print(best_3)
             # with open(os.path.join(args.directory, 'serialized_logits', args.species, sample['name'][c]), 'wb') as f:
             #     pickle.dump(logits.cpu().detach().numpy(), f)
