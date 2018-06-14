@@ -39,7 +39,7 @@ print(model)
 i = 0
 image = misc.imread('img/momiji.JPG')
 image = misc.imresize(image, (256, 256))
-image = np.reshape(1, 256, 256, 3)
+image = image.reshape((1, 256, 256, 3))
 image = torch.tensor(image).float()
 if cuda:
     image = image.cuda()
